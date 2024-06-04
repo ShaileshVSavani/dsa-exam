@@ -42,7 +42,7 @@ const isValid = (s) => {
       if (s[i] === "(" || s[i] === "[" || s[i] === "{") {
         stack.push(s[i]);
       } else if (s[i] === ")" || s[i] === "]" || s[i] === "}") {
-        if (isEmpty(stack)) {
+        if (stack.isEmpty(stack)) {
           return false;
         }
   
@@ -57,12 +57,9 @@ const isValid = (s) => {
       }
     }
   
-    return isEmpty(stack);
+    return stack.isEmpty(stack);
   }
   
-  function isEmpty(stack) {
-    return stack.length === 0;
-  }
   
   const string1 = "([{})";
   console.log(isValid(string1));
