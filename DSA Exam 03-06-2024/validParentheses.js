@@ -34,32 +34,62 @@ class Stack {
 
 
 
+// const isValid = (s) => {
+//     const stack = new Stack(s.length);
+  
+//     for (let i = 0; i < s.length; i++) {
+  
+//       if (s[i] === "(" || s[i] === "[" || s[i] === "{") {
+//         stack.push(s[i]);
+//       }
+//       else if (s[i] === ")" || s[i] === "]" || s[i] === "}") {
+//         if (stack.isEmpty(stack)) {
+//           return false;
+//         }
+  
+//         const top = stack.pop();
+//         if (
+//           (s[i] === ")" && top !== "(") ||
+//           (s[i] === "]" && top !== "[") ||
+//           (s[i] === "}" && top !== "{")
+//         ) {
+//           return false;
+//         }
+//       }
+//     }
+  
+//     return stack.isEmpty(stack);
+//   }
+
 const isValid = (s) => {
-    const stack = new Stack(s.length);
-  
-    for (let i = 0; i < s.length; i++) {
-  
-      if (s[i] === "(" || s[i] === "[" || s[i] === "{") {
-        stack.push(s[i]);
-      } else if (s[i] === ")" || s[i] === "]" || s[i] === "}") {
-        if (stack.isEmpty(stack)) {
-          return false;
+  let stk = new Stack(s.length);
+  for (let i = 0; i < s.length; i++) { 
+    if (s[i] === "(" || s[i] === "[" || s[i] === "{") {
+      stk.push(s[i]);
+    } 
+    else {
+      if (!stk.isEmpty()) {
+        if (stk.peek() == "(" && s[i] == ")" || stk.peek() == "{" && s[i] === "}" || stk.peek() == "[" && s[i] === "]") {
+          stk.pop();
         }
-  
-        const top = stack.pop();
-        if (
-          (s[i] === ")" && top !== "(") ||
-          (s[i] === "]" && top !== "[") ||
-          (s[i] === "}" && top !== "{")
-        ) {
+        else {
           return false;
         }
       }
+      else {
+        return false;
+      }
+     
     }
-  
-    return stack.isEmpty(stack);
   }
+  if (stk.isEmpty()) { 
+    return true;
+  }
+  else {
+    return false;
+  }
+}
   
   
-  const string1 = "([{})";
+  const string1 = "([{}])";
   console.log(isValid(string1));
